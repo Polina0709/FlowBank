@@ -14,6 +14,8 @@ import java.util.List;
 import static com.paymentapp.controller.LoginServlet.logger;
 
 public class AccountServlet extends HttpServlet {
+    private static final String ACTION_BLOCK = "block";
+
     private final AccountDAO accountDAO = new AccountDAO();
 
     @Override
@@ -40,7 +42,7 @@ public class AccountServlet extends HttpServlet {
         String action = request.getParameter("action");
 
         //  Дозволено тільки блокування клієнтом
-        if (!"block".equals(action)) {
+        if (!ACTION_BLOCK.equals(action)) {
             logger.warn("Невірна дія з боку клієнта: " + action);
             response.sendRedirect("account");
             return;
